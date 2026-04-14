@@ -4,21 +4,31 @@
 
 
 
-
-
-
-
-
-
-
-
-
 2.	Figure out which section number has above average sales in the last 4 months compared to other sections. This will help figure out where to put our high seller items to grab the customers’ attention.
-3.	Identify products that were completely sold out (total quantity sold equals the initial quantity stored in the store) to focus on keeping that product in stock 
-4.	Identify the above average genres of video games sold in the last 3 months. To understand which genre should be prioritized more for maximum profit.
+3.	Identify products that were completely sold out (total quantity sold equals the initial quantity stored in the store) to focus on keeping that product in stock
+4.	Identify the above average genres of video games sold in the last 3 months. To understand which genre should be prioritized more for maximum profit. //maybe rollup
 5.	Discover the demographics of our customers that have above average transactions sold in the last 3 months. This can help us get more products that cater to them specifically.
-6.	Identify whether employees with more years worked receive higher appraisal scores and fewer complaints. To help with a retention strategy and hiring decisions or training effectiveness
+6.	Identify whether employees with more years worked receive higher appraisal scores and fewer complaints. To help with a retention strategy and hiring decisions or training effectiveness //maybe do like on this one
+
 7.	Identify which console has above average sales in the past month. This way we know which consoles to focus more mainly on for our customers.
-8.	Identify the top 3 employees with above average amount of transactions in the past month. This could be used to reward hard-working employees (like a bonus or employee of the month award) and encourage other employees to work more.
+
+8.	Identify the top 3 employees with above average amount of transactions in the past month. This could be used to reward hard-working employees (like a bonus or employee of the month award) and encourage other employees to work more. //order by above average sales fetch first 3 rows
+
 9.	Identify how the age of our products affects their selling performance. Examples like seeing if 20+ year old products have higher sales than 19 years and younger products or vice versa. We will check each month to make sure we adjust to the needs of the customer.
-10.	Capture the below average performing employees for the last 4 months to let go based on customer experience (this will be based on the number of complaints, and appraisals the worker has). 
+
+10.	Capture the below average performing employees for the last 4 months to let go based on customer experience (this will be based on the number of complaints, and appraisals the worker has). //like as well
+
+
+You will be required to write at least 5 queries in 3 categories as follows:
+
+    Group by and aggregate queries
+        At least 2 queries on multiple relations containing GROUP BY, HAVING, and aggregate computations
+    At least 2 queries that correspond to data analysis (as in a data warehouse)
+        Should have CUBE and/or ROLLUP clauses
+    At least 1 query that showcases the concept of DIVISION
+
+The above queries should satisfy the following conditions as well,
+
+    Every query should be a join query with 2 relations, or a join query with more than 2 relations, or should have nested subqueries
+    At least 1 query should use the LIKE operator 							//Ratings? fetch first 5 raings like (%5) something like that
+    At least 1 query should have ORDER BY and FETCH to make the output interesting and meaningful.  	//order by accessories???
