@@ -1,0 +1,72 @@
+Goal #5
+SELECT 
+    c.Gender,
+    COUNT(c.CustomerID) AS NumAboveAverageCustomers, 							step4
+    SUM(t.TotalSpent) AS TotalSpendingFromHighCustomers ----------------------------------------------displaying format
+FROM Spring26_S008_T2_Customer c ------------------------join c and t after getting filtered results
+JOIN (
+    SELECT -----------------------------------------
+        CustomerID,						atep2 making list of customer above average spending
+        SUM(Cost) AS TotalSpent
+    FROM Spring26_S008_T2_Buys
+    WHERE TransactionDate BETWEEN DATE '2025-01-01' AND DATE '2026-01-31'
+    GROUP BY CustomerID --------------------------------------
+    HAVING SUM(Cost) > ( ----------------------------------------------
+        SELECT AVG(CustomerTotal)				step 1 making average of customer spending 
+        FROM (
+            SELECT SUM(Cost) AS CustomerTotal
+            FROM Spring26_S008_T2_Buys
+            WHERE TransactionDate BETWEEN DATE '2025-01-01' AND DATE '2026-01-31'
+            GROUP BY CustomerID -------------------------------------------
+        )
+    )
+) 
+t    ------------------------------------ step 3 t is list of above average customers
+ON c.CustomerID = t.CustomerID ----- i join it because i want to get gender of customers
+GROUP BY CUBE(c.Gender); ---- I use cube to get total of all genders other male and female
+
+
+Basically showing which gender had above average total buying and showing cusotmer total  by using cube
+
+Expected Format
+
+GENDER NUMABOVEAVERAGECUSTOMERS TOTALSPENDINGFROMHIGHCUSTOMERS
+------ ------------------------ ------------------------------
+                             20                        2541.44
+Male                          7                         880.48
+Other                         5                         660.48
+Female                        8                        1000.48
+
+
+
+
+SELECT ProductName, TotalSales AS AboveAvgTotal for format
+FROM (
+    SELECT p.ProductName, SUM(b.Cost) AS TotalSales ----calculate sale per console   
+    FROM Spring26_S008_T2_Buys b
+    JOIN Spring26_S008_T2_Product p       --------------------join purchase with product info
+        ON b.ProductID = p.ProductID
+    WHERE p.ProductType = 'Console'   -------------to filter consoles
+    GROUP BY ROLLUP(p.ProductName)    ------------for total
+)
+WHERE (ProductName IS NULL OR TotalSales > ( -----select product name where total sales above average nad IS NULL keeps rollup total row
+    SELECT AVG(TotalSales)   ------calculates average sales of consoles     
+    FROM (
+        SELECT p2.ProductName, SUM(b2.Cost) AS TotalSales
+        FROM Spring26_S008_T2_Buys b2
+        JOIN Spring26_S008_T2_Product p2 
+            ON b2.ProductID = p2.ProductID
+        WHERE p2.ProductType = 'Console'
+        GROUP BY p2.ProductName
+    )
+));
+
+expectedoutputname 
+PRODUCTNAME                                        ABOVEAVGTOTAL
+-------------------------------------------------- -------------
+Xbox Series X                                              59.99
+GameCube Classic                                              80
+PS Vita                                                       90
+Nintendo 3DS                                                 100
+Xbox One                                                     110
+PS3                                                          120
